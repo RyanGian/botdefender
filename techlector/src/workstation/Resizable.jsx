@@ -5,7 +5,7 @@ export default function Resizable() {
   return (
     <>
       <PanelGroup autoSaveId="horizontal" direction="horizontal">
-        <Panel maxSize={40}>
+        <Panel maxSize={35}>
           <PanelGroup autoSaveId="vertical" direction="vertical">
             <Panel maxSize={75}>
               <div className="panel"></div>
