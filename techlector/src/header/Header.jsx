@@ -24,6 +24,9 @@ export default function Header({ handleChange, isChecked }) {
 
   return (
     <div className="header-container">
+      <div className="nav-left">
+        <div className="logo">Techlector</div>
+      </div>
       <div className="nav-right">
         <Switch
           className="switch"

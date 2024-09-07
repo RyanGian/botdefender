@@ -1,0 +1,18 @@
+.workstation-container {
+  height: calc(100vh - 60px);
+  width: 100vw;
+  /* border-radius: 10px;
+  border: solid 3px black; */
+  /* background-color: aliceblue; */
+  bottom: 0;
+  position: absolute;
+  color: var(--primary-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resizable-container {
+  width: 98%;
+  height: 95%;
+}
