@@ -17,6 +17,7 @@
   --secondary-text-color: #fafafa;
   /* --toggle-bg: yellow;
   --toggle-fg: rgb(68, 68, 2); */
+  --logo: url("./assets/logos/logo-light.svg");
 }
 
 [data-theme="dark"] {
@@ -27,7 +28,9 @@
   --secondary-text-color: #1a1a1a;
   /* --toggle-bg: rgb(4, 0, 255);
   --toggle-fg: rgb(111, 109, 238); */
+  --logo: url("./assets/logos/logo-dark.svg");
 }
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -11,10 +11,21 @@
 
 .nav-left {
   margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
-.logo {
+.logo-image {
   margin-left: 2em;
+  font-size: 1em;
+  height: 18px;
+  content: var(--logo);
+}
+
+.logo-text {
+  margin-left: 0.8em;
   font-size: 1em;
   font-weight: 700;
   color: var(--primary-text-color);

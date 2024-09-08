@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import Workstation from "./workstation/Workstation.jsx";
 import Header from "./header/Header.jsx";
-import styled from "styled-components";
 import useLocalStorage from "use-local-storage";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -30,9 +29,3 @@ export default function App() {
     </MantineProvider>
   );
 }
-
-const AppContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  // background-color: red;
-`;
