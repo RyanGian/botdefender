@@ -1,8 +1,7 @@
-import styled from "styled-components";
 import { Switch, useMantineTheme, rem } from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
 import "./Header.css";
-import logo from "../assets/logos/logo-dark.svg";
+// import logo from "../assets/logos/logo-dark.svg";
 
 export default function Header({ handleChange, isChecked }) {
   const theme = useMantineTheme();
@@ -26,7 +25,7 @@ export default function Header({ handleChange, isChecked }) {
   return (
     <div className="header-container">
       <div className="nav-left">
-        <img className="logo-image" src={logo} alt="techlector-logo" />
+        <img className="logo-image" alt="techlector-logo" />
         <div className="logo-text">Techlector</div>
       </div>
       <div className="nav-right">
