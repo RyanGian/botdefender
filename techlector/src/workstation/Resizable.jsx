@@ -1,32 +1,54 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "./Resizable.css";
-import React from "react";
+import React, { useState } from "react";
 import Bottom from "./bottom.svg?react";
 import Left from "./left.svg?react";
 import Right from "./right.svg?react";
 import Top from "./top.svg?react";
+import { Button } from "@mantine/core";
+import ItemMenu from "./ItemMenu.jsx";
 
 export default function Resizable() {
-  const handleDrag = () => {
-    console.log("Dragging");
-  };
-
   return (
-    <>
-      <PanelGroup autoSaveId="horizontal" direction="horizontal">
-        <Panel maxSize={35}>
+    <div className="panel-container">
+      {/* <div className={sidebarClass}>
+        <Button
+          variant="filled"
+          onClick={handleViewSidebar}
+          className="sidebar-toggle"
+        >
+          Button
+        </Button>
+      </div>
+      <div className="panel-right"></div> */}
+    </div>
+  );
+}
+
+{
+  /* <PanelGroup autoSaveId="horizontal" direction="horizontal">
+        <Panel minSize={25} defaultSize={35} maxSize={35}>
+          <div className="panel-left">
+            <ItemMenu />
+          </div>
+        </Panel>
+        <PanelResizeHandle className="resize-width-handler">
+          <div className="with-handle-width">
+            <Left className="left-arrow" />
+            <Right className="right-arrow" />
+          </div>
+        </PanelResizeHandle>
+        <Panel defaultSize={70}>
+          <div className="panel-right"></div>
+        </Panel> */
+}
+
+{
+  /*
+        <Panel maxSize={10}>
           <PanelGroup autoSaveId="vertical" direction="vertical">
-            <Panel maxSize={75}>
-              <div className="panel"></div>
-            </Panel>
-            <PanelResizeHandle className="resize-height-handler">
-              <div className="with-handle-height ">
-                <Top className="top-arrow" />
-                <Bottom className="bottom-arrow" />
-              </div>
-            </PanelResizeHandle>
-            <Panel maxSize={75}>
-              <div className="panel"></div>
+            <Panel maxSize={90}>
+              <div className="panel-left"></div>
             </Panel>
           </PanelGroup>
         </Panel>
@@ -38,9 +60,9 @@ export default function Resizable() {
         </PanelResizeHandle>
 
         <Panel maxSize={80}>
-          <div className="panel"></div>
-        </Panel>
-      </PanelGroup>
-    </>
-  );
+          <div className="panel-right"></div>
+        </Panel> */
+}
+{
+  /* </PanelGroup> */
 }
