@@ -9,20 +9,7 @@ import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
 
 export default function Resizable() {
-  return (
-    <div className="panel-container">
-      {/* <div className={sidebarClass}>
-        <Button
-          variant="filled"
-          onClick={handleViewSidebar}
-          className="sidebar-toggle"
-        >
-          Button
-        </Button>
-      </div>
-      <div className="panel-right"></div> */}
-    </div>
-  );
+  return <div className="panel-container"></div>;
 }
 
 {
