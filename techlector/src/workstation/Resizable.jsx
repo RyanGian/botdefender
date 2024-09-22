@@ -7,10 +7,20 @@ import Right from "./right.svg?react";
 import Top from "./top.svg?react";
 import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
+import Dropdown from "./components/dropdown.jsx";
+
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
 } from "react-icons/tb";
+
+import { PiSquaresFourFill } from "react-icons/pi";
+
+import { IoIosApps } from "react-icons/io";
+import { IoApps } from "react-icons/io5";
+import { FaSquare } from "react-icons/fa";
+import { TbFilter } from "react-icons/tb";
+import { MdFilterListAlt } from "react-icons/md";
 
 export default function Resizable() {
   return (
@@ -25,12 +35,21 @@ export default function Resizable() {
           <div className="collapsible-navbar">
             <TbLayoutSidebarLeftCollapseFilled className="left-collapse-button" />
           </div>
+          <div className="filters-search-row">
+            <Dropdown></Dropdown>
+            <PiSquaresFourFill className="stack" />
+            <MdFilterListAlt className="stack" />
+          </div>
         </Panel>
         <PanelResizeHandle className="vertical-resize-bar">
           <div className="vertical-bar"></div>
         </PanelResizeHandle>
         <Panel className="panel-right" defaultSize={30} minSize={20}>
-          right
+          <div className="bottom-options">
+            <IoIosApps className="stack" />
+            <IoApps className="stack" />
+            <FaSquare className="stack" />
+          </div>
         </Panel>
       </PanelGroup>
     </div>
