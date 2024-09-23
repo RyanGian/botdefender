@@ -7,7 +7,8 @@ import Right from "./right.svg?react";
 import Top from "./top.svg?react";
 import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
-import Dropdown from "./components/dropdown.jsx";
+import Dropdown from "./components/Dropdown.jsx";
+import SpecificFilters from "./components/specificFilters.jsx";
 
 import {
   TbLayoutSidebarLeftCollapseFilled,
