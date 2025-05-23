@@ -9,6 +9,7 @@ import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
 import Dropdown from "./components/Dropdown.jsx";
 import SpecificFilters from "./components/SpecificFilters.jsx";
+import { Grid } from "@mantine/core";
 
 import {
   TbLayoutSidebarLeftCollapseFilled,
@@ -30,7 +31,7 @@ export default function Resizable() {
           className="panel-left"
           defaultSize={30}
           minSize={20}
-          maxSize={50}
+          maxSize={40}
         >
           <div className="collapsible-navbar">
             <TbLayoutSidebarLeftCollapseFilled className="left-collapse-button" />
@@ -46,11 +47,25 @@ export default function Resizable() {
           <div className="vertical-bar"></div>
         </PanelResizeHandle>
         <Panel className="panel-right" defaultSize={30} minSize={20}>
-          <div className="bottom-options">
+          <Grid grow gutter="10px">
+            <Grid.Col span={6}>
+              <div className="boxes">1</div>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <div className="boxes">1</div>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <div className="boxes">1</div>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <div className="boxes">1</div>
+            </Grid.Col>
+          </Grid>
+          {/* <div className="bottom-options">
             <IoIosApps className="stack" />
             <IoApps className="stack" />
             <FaSquare className="stack" />
-          </div>
+          </div> */}
         </Panel>
       </PanelGroup>
     </div>
