@@ -33,12 +33,12 @@
   flex-direction: column;
   padding-top: 5px;
   padding-bottom: 5px;
-  opacity: 0;
-  transition: opacity 0.1s ease-out;
+  visibility: hidden;
+  transition: hidden 0.1s ease-out;
 }
 
 .dropdown-box-open {
-  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown-box-children {

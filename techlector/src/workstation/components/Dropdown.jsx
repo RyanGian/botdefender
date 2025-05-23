@@ -44,7 +44,7 @@ export default function Dropdown() {
         }
       >
         {items.map((e, index) => (
-          <div className="dropdown-box-children" key={index}>
+          <div className={"dropdown-box-children"} key={index}>
             {e}
           </div>
         ))}

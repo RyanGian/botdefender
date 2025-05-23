@@ -8,7 +8,7 @@ import Top from "./top.svg?react";
 import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
 import Dropdown from "./components/Dropdown.jsx";
-import SpecificFilters from "./components/specificFilters.jsx";
+import SpecificFilters from "./components/SpecificFilters.jsx";
 
 import {
   TbLayoutSidebarLeftCollapseFilled,
@@ -20,7 +20,6 @@ import { PiSquaresFourFill } from "react-icons/pi";
 import { IoIosApps } from "react-icons/io";
 import { IoApps } from "react-icons/io5";
 import { FaSquare } from "react-icons/fa";
-import { TbFilter } from "react-icons/tb";
 import { MdFilterListAlt } from "react-icons/md";
 
 export default function Resizable() {
@@ -41,6 +40,7 @@ export default function Resizable() {
             <PiSquaresFourFill className="stack" />
             <MdFilterListAlt className="stack" />
           </div>
+          <SpecificFilters></SpecificFilters>
         </Panel>
         <PanelResizeHandle className="vertical-resize-bar">
           <div className="vertical-bar"></div>
@@ -55,43 +55,4 @@ export default function Resizable() {
       </PanelGroup>
     </div>
   );
-}
-
-{
-  /* <PanelGroup autoSaveId="horizontal" direction="horizontal">
-        <Panel minSize={25} defaultSize={35} maxSize={35}>
-          <div className="panel-left">
-            <ItemMenu />
-          </div>
-        </Panel>
-        <PanelResizeHandle className="resize-width-handler">
-          <div className="with-handle-width">
-            <Left className="left-arrow" />
-            <Right className="right-arrow" />
-          </div>
-        </PanelResizeHandle>
-        <Panel defaultSize={70}>
-          <div className="panel-right"></div>
-        </Panel> */
-  /*
-        <Panel maxSize={10}>
-          <PanelGroup autoSaveId="vertical" direction="vertical">
-            <Panel maxSize={90}>
-              <div className="panel-left"></div>
-            </Panel>
-          </PanelGroup>
-        </Panel>
-        <PanelResizeHandle className="resize-width-handler">
-          <div className="with-handle-width">
-            <Left className="left-arrow" />
-            <Right className="right-arrow" />
-          </div>
-        </PanelResizeHandle>
-
-        <Panel maxSize={80}>
-          <div className="panel-right"></div>
-        </Panel> */
-}
-{
-  /* </PanelGroup> */
 }
