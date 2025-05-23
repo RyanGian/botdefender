@@ -1,0 +1,81 @@
+.panel-container {
+  height: 100%;
+  width: 100%;
+}
+
+.panel-left {
+  height: 100%;
+  width: 30vw;
+  border: 1px solid var(--foreground-color);
+  background-color: var(--foreground-color);
+  border-radius: 0 5px 0 0;
+}
+
+.collapsible-navbar {
+  /* background-color: aliceblue; */
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.filters-search-row {
+  /* background-color: aliceblue; */
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  padding-right: 15px;
+}
+
+.panel-right {
+  height: 100%;
+  width: 68vw;
+  border: 1px solid var(--foreground-color);
+  background-color: var(--background-color);
+}
+
+.vertical-resize-bar {
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical-bar {
+  width: 6px;
+  height: 38px;
+  border-radius: 10px;
+  background-color: var(--foreground-color);
+}
+
+.left-collapse-button,
+.right-collapse-button {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  color: var(--contrast-color);
+}
+
+.stack {
+  width: 25px;
+  height: 25px;
+  color: var(--contrast-color);
+}
+
+.bottom-options {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  height: 100%;
+  padding-bottom: 10px;
+}
+
+.stack:hover {
+  cursor: pointer;
+  color: var(--hover-color);
+}

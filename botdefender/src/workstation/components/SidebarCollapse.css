@@ -1,0 +1,45 @@
+.collapse-container {
+  width: 90%;
+  background-color: rgb(168, 160, 175);
+  min-height: 30px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: flex-start;
+  color: var(--contrast-color);
+}
+
+.collapse-icon {
+  width: 20px;
+  height: 20px;
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.label-text {
+  width: 80%;
+  /* background-color: antiquewhite; */
+  overflow-wrap: break-word;
+}
+
+.right-arrow {
+  width: 20px;
+  height: 20px;
+}
+
+.collapse-container {
+  cursor: pointer;
+}
+
+.collapse-container-dropdown {
+  width: 90%;
+  min-height: 10px;
+  /* background-color: aqua; */
+}
+
+.menu-items {
+  width: 100%;
+  height: 30px;
+  background-color: azure;
+}
