@@ -81,7 +81,7 @@
 }
 
 .boxes {
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 8px;
   background-color: var(--foreground-color);
   color: var(--secondary-text-color);

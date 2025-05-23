@@ -11,6 +11,8 @@ import Dropdown from "./components/Dropdown.jsx";
 import SpecificFilters from "./components/SpecificFilters.jsx";
 import { Grid } from "@mantine/core";
 
+import GlobeCanvas from "./components/globe/GlobeCanvas.jsx";
+
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
@@ -48,12 +50,16 @@ export default function Resizable() {
         </PanelResizeHandle>
         <Panel className="panel-right" defaultSize={30} minSize={20}>
           <Grid grow gutter="10px">
-            <Grid.Col span={6}>
-              <div className="boxes">1</div>
+            <Grid.Col span={12}>
+              <div className="boxes">
+                <div style={{ width: "100%", height: "100%" }}>
+                  <GlobeCanvas></GlobeCanvas>
+                </div>
+              </div>
             </Grid.Col>
-            <Grid.Col span={6}>
+            {/* <Grid.Col span={6}>
               <div className="boxes">1</div>
-            </Grid.Col>
+            </Grid.Col> */}
             <Grid.Col span={6}>
               <div className="boxes">1</div>
             </Grid.Col>
