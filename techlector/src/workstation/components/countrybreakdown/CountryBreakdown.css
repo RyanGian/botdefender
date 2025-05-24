@@ -1,0 +1,13 @@
+.countrybreakdown-container {
+  /* display: flex;
+  align-content: center;
+  justify-content: center; */
+  /* background-color: red; */
+  height: 100%;
+  width: 100%;
+}
+
+.barchart {
+  width: 90%;
+  padding-top: 80px;
+}

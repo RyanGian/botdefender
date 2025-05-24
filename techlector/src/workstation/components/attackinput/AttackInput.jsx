@@ -1,6 +1,6 @@
 import "./AttackInput.css";
 import { useState } from "react";
-import { Group, TextInput, Select, Button, Alert } from "@mantine/core";
+import { Group, TextInput, Autocomplete, Button, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconCheck } from "@tabler/icons-react"; // For success icon
 
@@ -181,6 +181,8 @@ export default function AttackInput() {
   ].sort((a, b) => a.localeCompare(b));
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // <-- Loading state
 
   const form = useForm({
     initialValues: {
@@ -197,8 +199,6 @@ export default function AttackInput() {
       country: (value) => (value ? null : "Please select a country"),
     },
   });
-
-  const [error, setError] = useState(null); // <-- for error state
 
   async function sendAttack(name, country) {
     try {
@@ -226,16 +226,19 @@ export default function AttackInput() {
     <div className="attackinput-outer-container">
       <form
         onSubmit={form.onSubmit(async (values) => {
+          setLoading(true); // Start loading
           try {
             const result = await sendAttack(values.name, values.country);
             setSubmitted(true);
             setError(null);
-            setTimeout(() => setSubmitted(false), 3000);
+            setTimeout(() => setSubmitted(false), 1000);
           } catch (err) {
             console.error("Submission error:", err.message);
             setError(err.message);
             setSubmitted(false);
-            setTimeout(() => setError(null), 5000); // auto-dismiss error after 5s
+            setTimeout(() => setError(null), 1500);
+          } finally {
+            setLoading(false); // End loading
           }
         })}
         className="attackinput-container"
@@ -255,7 +258,7 @@ export default function AttackInput() {
           error={form.errors.name}
         />
 
-        <Select
+        <Autocomplete
           label="Country"
           size="md"
           radius="md"
@@ -265,18 +268,19 @@ export default function AttackInput() {
           {...form.getInputProps("country")}
           error={form.errors.country}
         />
+
         <div className="submit-div">
           <Group mt="md">
             <Button
-              style={{
-                position: "relative",
-                marginLeft: "110px",
-              }}
+              style={{ position: "relative", marginLeft: "110px" }}
               type="submit"
+              loading={loading}
+              disabled={loading}
             >
               Submit
             </Button>
           </Group>
+
           {submitted && (
             <Alert
               icon={<IconCheck size={16} />}
@@ -286,8 +290,6 @@ export default function AttackInput() {
                 position: "relative",
                 width: "200px",
                 marginTop: "1rem",
-                top: "0",
-                right: "0",
               }}
             >
               Attack logged successfully.
@@ -302,8 +304,6 @@ export default function AttackInput() {
                 position: "relative",
                 width: "200px",
                 marginTop: "1rem",
-                top: "0",
-                right: "0",
               }}
             >
               {error}

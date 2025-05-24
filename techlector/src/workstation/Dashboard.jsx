@@ -1,5 +1,5 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import "./Resizable.css";
+import "./Dashboard.css";
 import React, { useState } from "react";
 import Bottom from "./bottom.svg?react";
 import Left from "./left.svg?react";
@@ -12,6 +12,7 @@ import SpecificFilters from "./components/SpecificFilters.jsx";
 import { Grid } from "@mantine/core";
 
 import GlobeCanvas from "./components/globe/GlobeCanvas.jsx";
+import CountryBreakdown from "./components/countrybreakdown/CountryBreakdown.jsx";
 
 import AttackInput from "./components/attackinput/AttackInput.jsx";
 
@@ -20,14 +21,14 @@ import {
   TbLayoutSidebarRightCollapseFilled,
 } from "react-icons/tb";
 
-// import { PiSquaresFourFill } from "react-icons/pi";
+import { PiSquaresFourFill } from "react-icons/pi";
 
-// import { IoIosApps } from "react-icons/io";
-// import { IoApps } from "react-icons/io5";
-// import { FaSquare } from "react-icons/fa";
-// import { MdFilterListAlt } from "react-icons/md";
+import { IoIosApps } from "react-icons/io";
+import { IoApps } from "react-icons/io5";
+import { FaSquare } from "react-icons/fa";
+import { MdFilterListAlt } from "react-icons/md";
 
-export default function Resizable() {
+export default function Dashboard() {
   return (
     <div className="panel-container">
       <PanelGroup autoSaveId="horizontal" direction="horizontal">
@@ -46,7 +47,7 @@ export default function Resizable() {
             <MdFilterListAlt className="stack" />
           </div> */}
           <AttackInput></AttackInput>
-          <SpecificFilters></SpecificFilters>
+          {/* <SpecificFilters></SpecificFilters> */}
         </Panel>
         <PanelResizeHandle className="vertical-resize-bar">
           <div className="vertical-bar"></div>
@@ -67,7 +68,9 @@ export default function Resizable() {
               <div className="boxes">1</div>
             </Grid.Col>
             <Grid.Col span={6}>
-              <div className="boxes">1</div>
+              <div className="boxes">
+                <CountryBreakdown></CountryBreakdown>
+              </div>
             </Grid.Col>
           </Grid>
           {/* <div className="bottom-options">

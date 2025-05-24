@@ -1,11 +1,11 @@
 import "./Workstation.css";
-import Resizable from "./Resizable.jsx";
+import Dashboard from "./Dashboard.jsx";
 
 export default function Workstation() {
   return (
     <div className="workstation-container">
-      <div className="resizable-container">
-        <Resizable></Resizable>
+      <div className="dashboard-container">
+        <Dashboard></Dashboard>
       </div>
     </div>
   );
