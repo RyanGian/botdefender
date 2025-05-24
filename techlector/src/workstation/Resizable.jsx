@@ -13,17 +13,19 @@ import { Grid } from "@mantine/core";
 
 import GlobeCanvas from "./components/globe/GlobeCanvas.jsx";
 
+import AttackInput from "./components/attackinput/AttackInput.jsx";
+
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
 } from "react-icons/tb";
 
-import { PiSquaresFourFill } from "react-icons/pi";
+// import { PiSquaresFourFill } from "react-icons/pi";
 
-import { IoIosApps } from "react-icons/io";
-import { IoApps } from "react-icons/io5";
-import { FaSquare } from "react-icons/fa";
-import { MdFilterListAlt } from "react-icons/md";
+// import { IoIosApps } from "react-icons/io";
+// import { IoApps } from "react-icons/io5";
+// import { FaSquare } from "react-icons/fa";
+// import { MdFilterListAlt } from "react-icons/md";
 
 export default function Resizable() {
   return (
@@ -35,14 +37,15 @@ export default function Resizable() {
           minSize={20}
           maxSize={40}
         >
-          <div className="collapsible-navbar">
+          {/* <div className="collapsible-navbar">
             <TbLayoutSidebarLeftCollapseFilled className="left-collapse-button" />
-          </div>
-          <div className="filters-search-row">
+          </div> */}
+          {/* <div className="filters-search-row">
             <Dropdown></Dropdown>
             <PiSquaresFourFill className="stack" />
             <MdFilterListAlt className="stack" />
-          </div>
+          </div> */}
+          <AttackInput></AttackInput>
           <SpecificFilters></SpecificFilters>
         </Panel>
         <PanelResizeHandle className="vertical-resize-bar">

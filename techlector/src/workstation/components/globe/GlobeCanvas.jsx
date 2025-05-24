@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Globe from "react-globe.gl";
+import { useLayoutEffect } from "react";
 
 export default function GlobeCanvas() {
   const globeRef = useRef();
@@ -8,10 +9,10 @@ export default function GlobeCanvas() {
   const [countries, setCountries] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  const highlightedCountries = ["USA", "CAN", "BRA"];
+  const highlightedCountries = ["United States", "Canada", "Brazil"];
   // Load countries GeoJSON
   useEffect(() => {
-    fetch("public/world.geojson") // Make sure this file exists in /public
+    fetch("/world.geojson") // Make sure this file exists in /public
       .then((res) => res.json())
       .then((data) => setCountries(data.features));
   }, []);
@@ -20,9 +21,9 @@ export default function GlobeCanvas() {
   useEffect(() => {
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 0.5;
+      globeRef.current.controls().autoRotateSpeed = 1;
     }
-  }, []);
+  }, [globeRef.current]);
 
   // ResizeObserver to track parent size
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function GlobeCanvas() {
   }, []);
 
   const getPolygonCapColor = (country) => {
-    if (highlightedCountries.includes(country.properties.ISO_A3)) {
+    if (highlightedCountries.includes(country.properties.ADMIN)) {
       return "rgba(255, 0, 0, 0.8)"; // Highlighted color (red)
     }
     return "rgba(238, 243, 243, 0.6)"; // Default color (cyan)
