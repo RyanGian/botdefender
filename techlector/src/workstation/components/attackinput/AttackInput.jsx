@@ -231,12 +231,12 @@ export default function AttackInput() {
             const result = await sendAttack(values.name, values.country);
             setSubmitted(true);
             setError(null);
-            setTimeout(() => setSubmitted(false), 1000);
+            setTimeout(() => setSubmitted(false), 2000);
           } catch (err) {
             console.error("Submission error:", err.message);
             setError(err.message);
             setSubmitted(false);
-            setTimeout(() => setError(null), 1500);
+            setTimeout(() => setError(null), 2000);
           } finally {
             setLoading(false); // End loading
           }

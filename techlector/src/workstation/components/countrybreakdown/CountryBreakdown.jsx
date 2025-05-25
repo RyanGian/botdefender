@@ -1,31 +1,24 @@
 import "./CountryBreakdown.css";
-import { BarChart } from "@mantine/charts";
 import { useState, useEffect } from "react";
+import { BarChart } from "@mantine/charts";
+
+import Bottom from "./bottom.svg?react";
+import Left from "./left.svg?react";
+import Right from "./right.svg?react";
+import Top from "./top.svg?react";
+
+import { Group, Button } from "@mantine/core";
+import { IconPhoto, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 export default function CountryBreakdown() {
-  const data = [
-    { month: "January", Smartphones: 1200, Laptops: 900, Tablets: 200 },
-    { month: "February", Smartphones: 1900, Laptops: 1200, Tablets: 400 },
-    { month: "March", Smartphones: 400, Laptops: 1000, Tablets: 200 },
-    { month: "April", Smartphones: 1000, Laptops: 200, Tablets: 800 },
-    { month: "May", Smartphones: 800, Laptops: 1400, Tablets: 1200 },
-    { month: "June", Smartphones: 750, Laptops: 600, Tablets: 1000 },
-    { month: "June", Smartphones: 750, Laptops: 600, Tablets: 1000 },
-    { month: "June", Smartphones: 750, Laptops: 600, Tablets: 1000 },
-    { month: "June", Smartphones: 750, Laptops: 600, Tablets: 1000 },
-    { month: "June", Smartphones: 750, Laptops: 600, Tablets: 1000 },
-  ];
-
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("desc");
   const [nameFilter, setNameFilter] = useState("");
-  const [limit] = useState(5);
+  const [limit] = useState(10);
 
-  const [pageCursors, setPageCursors] = useState([null]); // cursor for each page
-  const [currentPage, setCurrentPage] = useState(0); // page index
-
-  const [totalPages, setTotalPages] = useState(null); // optional enhancement
+  const [pageCursors, setPageCursors] = useState([null]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     setPageCursors([null]);
@@ -36,25 +29,32 @@ export default function CountryBreakdown() {
   const fetchPage = async (pageIndex, reset = false) => {
     setLoading(true);
     try {
-      const cursor = pageCursors[pageIndex] ?? null;
+      const cursor = pageCursors[pageIndex];
       const url = new URL("http://localhost:8080/countries");
       url.searchParams.append("limit", limit);
       url.searchParams.append("sort", sort);
-      if (nameFilter) url.searchParams.append("nameFilter", nameFilter);
-      if (cursor) url.searchParams.append("cursor", cursor);
+
+      if (nameFilter) {
+        url.searchParams.append("nameFilter", nameFilter);
+      } else if (cursor) {
+        url.searchParams.append("cursorRequests", cursor.cursorRequests);
+        url.searchParams.append("cursorCountryName", cursor.cursorCountryName);
+      }
 
       const res = await fetch(url);
       const json = await res.json();
 
-      setCountries(json.data);
-
-      // if moving forward and new cursor exists, add it to list
-      if (json.nextCursor && pageCursors.length === pageIndex + 1) {
-        setPageCursors((prev) => [...prev, json.nextCursor]);
+      if (reset) {
+        setPageCursors([null]);
+        setCurrentPage(0);
       }
 
-      if (reset) {
-        setCountries(json.data);
+      setCountries(json.data);
+
+      if (json.nextCursor) {
+        const newCursors = [...pageCursors];
+        newCursors[pageIndex + 1] = json.nextCursor;
+        setPageCursors(newCursors);
       }
 
       setCurrentPage(pageIndex);
@@ -65,20 +65,22 @@ export default function CountryBreakdown() {
     }
   };
 
+  // Ensure a minimum of 10 rows
+  const MIN_ROWS = 10;
+  const paddedCountries = [
+    ...countries,
+    ...Array.from(
+      { length: Math.max(0, MIN_ROWS - countries.length) },
+      (_, i) => ({
+        countryName: ``,
+        requests: 0,
+      })
+    ),
+  ];
+
   return (
     <div className="countrybreakdown-container">
-      {/* <BarChart
-        className="barchart"
-        h={390}
-        data={data}
-        dataKey="month"
-        orientation="vertical"
-        yAxisProps={{ width: 100 }}
-        barProps={{ radius: 10 }}
-        series={[{ name: "Smartphones", color: "blue.6" }]}
-      /> */}
       <div>
-        {/* Filter Controls */}
         <div style={{ marginBottom: "1rem" }}>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="desc">Highest Requests</option>
@@ -92,24 +94,47 @@ export default function CountryBreakdown() {
           />
         </div>
 
-        {/* Country List */}
-        <ul>
-          {countries.map((c) => (
-            <li key={c.id}>
-              {c.country} — Requests: {c.requests}
-            </li>
-          ))}
-        </ul>
+        <BarChart
+          className="barchart"
+          h={300}
+          data={paddedCountries}
+          dataKey="countryName"
+          orientation="vertical"
+          yAxisProps={{ width: 100 }}
+          barProps={{ radius: 10 }}
+          series={[{ name: "requests", color: "blue.6" }]}
+        />
 
-        {/* Pagination Controls */}
         <div
           style={{
             display: "flex",
             gap: "1rem",
             alignItems: "center",
             marginTop: "1rem",
+            alignContent: "center",
+            justifyContent: "center",
+            flexDirection: "row",
           }}
         >
+          <Group justify="center">
+            <Button
+              variant="light"
+              className="arrow-buttons"
+              disabled={currentPage === 0 || loading}
+              onClick={() => fetchPage(currentPage - 1)}
+            >
+              <IconArrowLeft size={14}></IconArrowLeft>
+            </Button>
+
+            <Button
+              className="arrow-buttons"
+              variant="light"
+              disabled={loading || !pageCursors[currentPage + 1]}
+              onClick={() => fetchPage(currentPage + 1)}
+            >
+              <IconArrowRight size={14} />
+            </Button>
+          </Group>
           <button
             onClick={() => fetchPage(currentPage - 1)}
             disabled={currentPage === 0 || loading}
@@ -117,16 +142,13 @@ export default function CountryBreakdown() {
             ← Previous
           </button>
 
-          <span>
-            Page {currentPage + 1}
-            {totalPages ? ` of ${totalPages}` : ""}
-          </span>
+          <span>Page {currentPage + 1}</span>
 
           <button
             onClick={() => fetchPage(currentPage + 1)}
             disabled={loading || !pageCursors[currentPage + 1]}
           >
-            Next →
+            Next →{/* <Right /> */}
           </button>
         </div>
       </div>

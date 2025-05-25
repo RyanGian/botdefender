@@ -1,10 +1,7 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "./Dashboard.css";
 import React, { useState } from "react";
-import Bottom from "./bottom.svg?react";
-import Left from "./left.svg?react";
-import Right from "./right.svg?react";
-import Top from "./top.svg?react";
+
 import { Button } from "@mantine/core";
 import ItemMenu from "./ItemMenu.jsx";
 import Dropdown from "./components/Dropdown.jsx";

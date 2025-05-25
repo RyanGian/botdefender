@@ -9,5 +9,17 @@
 
 .barchart {
   width: 90%;
-  padding-top: 80px;
+  height: 90%;
+  margin-left: 20px;
+}
+
+.arrow-buttons {
+  &:disabled,
+  &[data-disabled] {
+    border-color: light-dark(
+      var(--mantine-color-gray-3),
+      var(--mantine-color-dark-4)
+    );
+    background-color: transparent;
+  }
 }
