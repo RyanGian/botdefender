@@ -1,14 +1,16 @@
 import "./CountryBreakdown.css";
 import { useState, useEffect } from "react";
 import { BarChart } from "@mantine/charts";
+import "@mantine/charts/styles.css";
 
-import Bottom from "./bottom.svg?react";
-import Left from "./left.svg?react";
-import Right from "./right.svg?react";
-import Top from "./top.svg?react";
-
-import { Group, Button } from "@mantine/core";
-import { IconPhoto, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { Group, Button, Select, Input } from "@mantine/core";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconSortAscending,
+  IconSortDescending,
+  IconSearch,
+} from "@tabler/icons-react";
 
 export default function CountryBreakdown() {
   const [countries, setCountries] = useState([]);
@@ -81,17 +83,31 @@ export default function CountryBreakdown() {
   return (
     <div className="countrybreakdown-container">
       <div>
-        <div style={{ marginBottom: "1rem" }}>
-          <select value={sort} onChange={(e) => setSort(e.target.value)}>
-            <option value="desc">Highest Requests</option>
-            <option value="asc">Lowest Requests</option>
-          </select>
-          <input
+        <div className="breakdown-filters" style={{ marginBottom: "1rem" }}>
+          Country overall requests
+          <Input
             type="text"
+            leftSection={<IconSearch></IconSearch>}
             placeholder="Search country"
             value={nameFilter}
             onChange={(e) => setNameFilter(e.target.value)}
           />
+          <Select
+            leftSection={
+              sort === "desc" ? <IconSortDescending /> : <IconSortAscending />
+            }
+            className="select-sort"
+            value={sort}
+            data={[
+              { value: "desc", label: "Highest" },
+              { value: "asc", label: "Lowest" },
+            ]}
+            onChange={setSort}
+          />
+          {/* <select value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="desc">Highest Requests</option>
+            <option value="asc">Lowest Requests</option>
+          </select> */}
         </div>
 
         <BarChart
@@ -102,7 +118,13 @@ export default function CountryBreakdown() {
           orientation="vertical"
           yAxisProps={{ width: 100 }}
           barProps={{ radius: 10 }}
-          series={[{ name: "requests", color: "blue.6" }]}
+          series={[
+            { name: "requests", color: "blue.6", label: "No. requests" },
+          ]}
+          gridProps={{
+            strokeDasharray: "0", // Removes dashed line
+            stroke: "transparent", // Hides grid entirely
+          }}
         />
 
         <div
@@ -125,7 +147,7 @@ export default function CountryBreakdown() {
             >
               <IconArrowLeft size={14}></IconArrowLeft>
             </Button>
-
+            <span>Page {currentPage + 1}</span>
             <Button
               className="arrow-buttons"
               variant="light"
@@ -135,7 +157,7 @@ export default function CountryBreakdown() {
               <IconArrowRight size={14} />
             </Button>
           </Group>
-          <button
+          {/* <button
             onClick={() => fetchPage(currentPage - 1)}
             disabled={currentPage === 0 || loading}
           >
@@ -148,8 +170,8 @@ export default function CountryBreakdown() {
             onClick={() => fetchPage(currentPage + 1)}
             disabled={loading || !pageCursors[currentPage + 1]}
           >
-            Next →{/* <Right /> */}
-          </button>
+            Next →
+          </button> */}
         </div>
       </div>
     </div>

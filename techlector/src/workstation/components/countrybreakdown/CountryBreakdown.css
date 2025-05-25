@@ -8,18 +8,41 @@
 }
 
 .barchart {
-  width: 90%;
-  height: 90%;
+  width: 90% !important;
+
   margin-left: 20px;
+  /* background-color: #4dabf7; */
 }
 
 .arrow-buttons {
   &:disabled,
   &[data-disabled] {
     border-color: light-dark(
-      var(--mantine-color-gray-3),
-      var(--mantine-color-dark-4)
+      var(--mantine-color-gray-8),
+      var(--mantine-color-dark-3)
     );
     background-color: transparent;
   }
+}
+
+.select-sort {
+  width: 130px;
+}
+
+.breakdown-filters {
+  /* background-color: aliceblue; */
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  flex-direction: row;
+  gap: 10px;
+  padding-top: 30px;
+  margin-left: 20px;
+}
+
+.barchart .recharts-bar-rectangle:hover {
+  fill: #4dabf7 !important; /* Blue.4 from Mantine palette or your custom */
+  opacity: 0.9;
+  cursor: pointer;
 }
