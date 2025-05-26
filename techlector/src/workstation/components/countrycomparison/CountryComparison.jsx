@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import "./CountryComparison.css";
-import { LineChart } from "@mantine/charts";
+import { AreaChart } from "@mantine/charts";
 
 export default function CountryComparison() {
   const data = [
@@ -14,27 +15,39 @@ export default function CountryComparison() {
     { date: "Nov", temperature: 0 },
   ];
 
+  const [userData, setUserData] = useState(null);
+
+  async function getUserAttacksByCountry(country) {
+    try {
+      const response = await fetch(
+        `http://localhost:5173/countries/users-attacks?country=${country}`
+      );
+      const result = await response.json();
+      console.log("Result:", result);
+      return result;
+    } catch (error) {
+      console.error("Error fetching attacks:", error);
+    }
+  }
+
+  useEffect(() => {
+    getUserAttacksByCountry("Australia");
+    console.log(JSON.stringify(userData));
+  }, []);
+
   return (
     <div className="countrycomparison-container">
       <div className="gradient">Country Request Gradient</div>
 
-      <LineChart
-        className="heat-graph"
+      <AreaChart
         h={300}
         data={data}
-        series={[{ name: "temperature", label: "Avg. Temperature" }]}
         dataKey="date"
-        type="gradient"
-        gradientStops={[
-          { offset: 0, color: "red.6" },
-          { offset: 20, color: "orange.6" },
-          { offset: 40, color: "yellow.5" },
-          { offset: 70, color: "lime.5" },
-          { offset: 80, color: "cyan.5" },
-          { offset: 100, color: "blue.5" },
+        type="stacked"
+        series={[
+          { name: "date", color: "indigo.6" },
+          { name: "temperature", color: "blue.6" },
         ]}
-        strokeWidth={5}
-        curveType="natural"
       />
     </div>
   );
