@@ -5,6 +5,7 @@ import Header from "./header/Header.jsx";
 import useLocalStorage from "use-local-storage";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
 
 export default function App() {
   // const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;

@@ -1,7 +1,6 @@
 import "./CountryBreakdown.css";
 import { useState, useEffect } from "react";
 import { BarChart } from "@mantine/charts";
-import "@mantine/charts/styles.css";
 
 import { Group, Button, Select, Input } from "@mantine/core";
 import {

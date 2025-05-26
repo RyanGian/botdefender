@@ -28,6 +28,9 @@ import { FaSquare } from "react-icons/fa";
 import { MdFilterListAlt } from "react-icons/md";
 
 export default function Dashboard() {
+  const [userRequestBreakdownCountry, setUserRequestBreakdownCountry] =
+    useState([]);
+
   return (
     <div className="panel-container">
       <PanelGroup autoSaveId="horizontal" direction="horizontal">
