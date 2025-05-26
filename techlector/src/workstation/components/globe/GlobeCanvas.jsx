@@ -21,7 +21,7 @@ export default function GlobeCanvas() {
   useEffect(() => {
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 1;
+      globeRef.current.controls().autoRotateSpeed = 0.8;
     }
   }, [globeRef.current]);
 

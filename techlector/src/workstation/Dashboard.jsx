@@ -13,6 +13,8 @@ import CountryBreakdown from "./components/countrybreakdown/CountryBreakdown.jsx
 
 import AttackInput from "./components/attackinput/AttackInput.jsx";
 
+import CountryComparison from "./components/countrycomparison/CountryComparison.jsx";
+
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
@@ -62,7 +64,9 @@ export default function Dashboard() {
               <div className="boxes">1</div>
             </Grid.Col> */}
             <Grid.Col span={6}>
-              <div className="boxes">1</div>
+              <div className="boxes">
+                <CountryComparison></CountryComparison>
+              </div>
             </Grid.Col>
             <Grid.Col span={6}>
               <div className="boxes">

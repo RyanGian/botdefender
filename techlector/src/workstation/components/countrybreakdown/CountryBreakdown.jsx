@@ -80,11 +80,18 @@ export default function CountryBreakdown() {
     ),
   ];
 
+  const maxRequests = Math.max(...paddedCountries.map((c) => c.requests));
+  const step = 5;
+  const ticks = Array.from(
+    { length: Math.ceil(maxRequests / step) + 1 },
+    (_, i) => i * step
+  );
+
   return (
     <div className="countrybreakdown-container">
       <div>
         <div className="breakdown-filters" style={{ marginBottom: "1rem" }}>
-          Country overall requests
+          Country Request Audit
           <Input
             type="text"
             leftSection={<IconSearch></IconSearch>}
@@ -116,6 +123,10 @@ export default function CountryBreakdown() {
           data={paddedCountries}
           dataKey="countryName"
           orientation="vertical"
+          xAxisProps={{
+            type: "number",
+            ticks,
+          }}
           yAxisProps={{ width: 100 }}
           barProps={{ radius: 10 }}
           series={[
