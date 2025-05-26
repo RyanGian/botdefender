@@ -29,7 +29,7 @@ import { MdFilterListAlt } from "react-icons/md";
 
 export default function Dashboard() {
   const [userRequestBreakdownCountry, setUserRequestBreakdownCountry] =
-    useState([]);
+    useState("");
 
   return (
     <div className="panel-container">
@@ -59,7 +59,10 @@ export default function Dashboard() {
             <Grid.Col span={12}>
               <div className="boxes">
                 <div style={{ width: "100%", height: "100%" }}>
-                  <GlobeCanvas></GlobeCanvas>
+                  <GlobeCanvas
+                    selectedCountry={userRequestBreakdownCountry}
+                    setSelectedCountry={setUserRequestBreakdownCountry}
+                  ></GlobeCanvas>
                 </div>
               </div>
             </Grid.Col>
@@ -68,7 +71,10 @@ export default function Dashboard() {
             </Grid.Col> */}
             <Grid.Col span={6}>
               <div className="boxes">
-                <CountryComparison></CountryComparison>
+                <CountryComparison
+                  selectedCountry={userRequestBreakdownCountry}
+                  setSelectedCountry={setUserRequestBreakdownCountry}
+                ></CountryComparison>
               </div>
             </Grid.Col>
             <Grid.Col span={6}>

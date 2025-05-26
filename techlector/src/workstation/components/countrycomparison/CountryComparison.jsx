@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./CountryComparison.css";
 import { AreaChart } from "@mantine/charts";
-import { Input } from "@mantine/core";
+import { Input, Autocomplete } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { countries } from "./countries";
 
 export default function CountryComparison({
-  userRequestBreakdownCountry,
-  setUserRequestBreakdownCountry,
+  selectedCountry,
+  setSelectedCountry,
 }) {
   const [userData, setUserData] = useState([]);
   const [series, setSeries] = useState([]);
@@ -25,10 +25,13 @@ export default function CountryComparison({
       return { data: [] };
     }
   }
+  useEffect(() => {
+    console.log(selectedCountry);
+  }, [selectedCountry]);
 
   useEffect(() => {
     async function fetchAndTransform() {
-      const rawDataResponse = await getUserAttacksByCountry("Afghanistan");
+      const rawDataResponse = await getUserAttacksByCountry(selectedCountry);
       const rawData = rawDataResponse?.data || [];
 
       // Extract all unique usernames (keys) across all date entries
@@ -78,34 +81,39 @@ export default function CountryComparison({
 
       setSeries(generatedSeries);
 
-      console.log("Transformed:", transformed);
-      console.log("Series:", generatedSeries);
+      // console.log("Transformed:", transformed);
+      // console.log("Series:", generatedSeries);
     }
 
     fetchAndTransform();
-  }, []);
+  }, [selectedCountry]);
 
   return (
     <div className="countrycomparison-container">
-      <div className="gradient">User requests breakdown by month: Aus</div>
-      <Input
-        type="text"
-        leftSection={<IconSearch></IconSearch>}
-        placeholder="Search country"
-        // value={nameFilter}
-        // onChange={(e) => setNameFilter(e.target.value)}
-      />
+      <div className="countrycomparison-title">
+        User requests breakdown by month: {selectedCountry}
+      </div>
+      {/* <div className="country-search">
+        <Autocomplete
+          leftSection={<IconSearch></IconSearch>}
+          size="md"
+          radius="md"
+          placeholder="Search a Country"
+          style={{ width: "200px", marginBottom: "1rem" }}
+          data={countries}
+        />
+      </div> */}
       <div style={{ width: "95%" }}>
-        {userData.length > 0 && (
+        {
           <AreaChart
             h={300}
             data={userData}
             dataKey="date"
-            type="gradient"
+            // type="gradient"
             series={series}
             withPointLabels
           />
-        )}
+        }
       </div>
     </div>
   );

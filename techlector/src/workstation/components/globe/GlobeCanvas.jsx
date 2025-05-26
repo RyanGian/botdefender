@@ -2,14 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import Globe from "react-globe.gl";
 import { useLayoutEffect } from "react";
 
-export default function GlobeCanvas() {
+export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
   const globeRef = useRef();
   const containerRef = useRef();
 
   const [countries, setCountries] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
+  const selectCountry = (country) => {
+    setSelectedCountry(country);
+  };
+
   const highlightedCountries = ["United States", "Canada", "Brazil"];
+
   // Load countries GeoJSON
   useEffect(() => {
     fetch("/world.geojson") // Make sure this file exists in /public
@@ -21,7 +26,7 @@ export default function GlobeCanvas() {
   useEffect(() => {
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 0.8;
+      globeRef.current.controls().autoRotateSpeed = 0.5;
     }
   }, [globeRef.current]);
 
@@ -61,7 +66,7 @@ export default function GlobeCanvas() {
           globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg"
           polygonsData={countries}
           polygonSideColor={() => "rgba(11, 65, 146, 0.15)"}
-          polygonCapColor={getPolygonCapColor} // Apply the custom color logic
+          polygonCapColor={getPolygonCapColor}
           polygonStrokeColor={() =>
             localStorage.getItem("isDark") === "true" ? "gray" : "white"
           }
@@ -73,8 +78,16 @@ export default function GlobeCanvas() {
             </div>`
           }
           backgroundColor="rgba(0,0,0,0)"
-          atmosphereColor="rgba(209, 209, 209, 0)" // ✅ Add gray halo
+          atmosphereColor="rgba(209, 209, 209, 0)"
           atmosphereAltitude={0.15}
+          onPolygonClick={(polygon) => {
+            console.log("Clicked country:", polygon.properties.ADMIN);
+            const countryName = polygon.properties.ADMIN;
+            // console.log(polygon);
+            setSelectedCountry(countryName);
+            console.log("typeof setSelectedCountry", typeof setSelectedCountry);
+            console.log("asfasdfasd");
+          }}
         />
       )}
     </div>
