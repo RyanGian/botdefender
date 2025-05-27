@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import "./CountryComparison.css";
+import "./UserBreakdown.css";
 import { AreaChart } from "@mantine/charts";
 import { Input, Autocomplete } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { countries } from "./countries";
 
-export default function CountryComparison({
-  selectedCountry,
-  setSelectedCountry,
-}) {
+export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
   const [userData, setUserData] = useState([]);
   const [series, setSeries] = useState([]);
 

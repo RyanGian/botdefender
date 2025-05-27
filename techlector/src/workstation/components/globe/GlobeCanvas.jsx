@@ -104,14 +104,14 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
               <strong>${properties.ADMIN}</strong><br/>
               Population: ${Number(properties.POP_EST).toLocaleString()}<br/>
               Region: ${properties.REGION_UN || "N/A"}<br/>
-              Users Banned: ${highlightedCountries[properties.ADMIN] ?? 0}
+              Users Banned: ${highlightedCountries[properties.ADMIN] ?? "N/A"}
             </div>`
           }
           backgroundColor="rgba(0,0,0,0)"
           atmosphereColor="rgba(209, 209, 209, 0)"
           atmosphereAltitude={0.15}
           onPolygonClick={(polygon) => {
-            console.log("Clicked country:", polygon.properties.ADMIN);
+            // console.log("Clicked country:", polygon.properties.ADMIN);
             const countryName = polygon.properties.ADMIN;
             // console.log(polygon);
             setSelectedCountry(countryName);
