@@ -1,14 +1,10 @@
-.countrycomparison-container {
+.userbreakdown-container {
   height: 100%;
   width: 100%;
   /* background-color: aqua; */
 }
 
-.heat-graph {
-  padding-top: 30px;
-}
-
-.countrycomparison-title {
+.userbreakdown-title {
   padding-top: 40px;
   padding-left: 30px;
   padding-bottom: 30px;
@@ -17,4 +13,8 @@
 .country-search {
   width: 200px;
   margin: 20px 0px 30px 30px;
+}
+
+.userbreakdown-chart {
+  width: 95%;
 }

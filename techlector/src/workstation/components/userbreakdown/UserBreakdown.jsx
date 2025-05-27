@@ -15,16 +15,12 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
         `http://localhost:8080/countries/users-attacks?country=${country}`
       );
       const result = await response.json();
-      console.log("Raw Result:", result);
+      // console.log("Raw Result:", result);
       return result;
     } catch (error) {
       console.error("Error fetching attacks:", error);
-      return { data: [] };
     }
   }
-  useEffect(() => {
-    console.log(selectedCountry);
-  }, [selectedCountry]);
 
   useEffect(() => {
     async function fetchAndTransform() {
@@ -40,11 +36,6 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
       });
 
       const allUsernames = Array.from(userKeys);
-
-      // Sort usernames to put "f" first
-      allUsernames.sort((a, b) =>
-        a === "f" ? -1 : b === "f" ? 1 : a.localeCompare(b)
-      );
 
       // Create a normalized array where every entry has every username key
       const transformed = rawData.map((item) => {
@@ -88,8 +79,8 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
   }, [selectedCountry]);
 
   return (
-    <div className="countrycomparison-container">
-      <div className="countrycomparison-title">
+    <div className="userbreakdown-container">
+      <div className="userbreakdown-title">
         User requests breakdown by month: {selectedCountry}
       </div>
       {/* <div className="country-search">
@@ -102,7 +93,7 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
           data={countries}
         />
       </div> */}
-      <div style={{ width: "95%" }}>
+      <div className="userbreakdown-chart">
         {
           <AreaChart
             h={300}

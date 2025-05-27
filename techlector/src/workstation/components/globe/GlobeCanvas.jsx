@@ -60,7 +60,7 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
       }, {});
 
       setHighlightedCountries(allHighlightedCountries);
-      console.log(JSON.stringify(allHighlightedCountries));
+      // console.log(JSON.stringify(allHighlightedCountries));
     } catch (err) {
       console.error("Error fetching countries:", err);
     }
@@ -69,12 +69,12 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
   const getPolygonCapColor = (country) => {
     if (Object.keys(highlightedCountries).includes(country.properties.ADMIN)) {
       if (highlightedCountries[country.properties.ADMIN] === 0) {
-        return "rgba(22, 128, 75, 0.8)"; // Highlighted color (red)
+        return "rgba(22, 128, 75, 0.8)";
       } else {
-        return "rgba(255, 0, 0, 0.8)"; // Highlighted color (red)
+        return "rgba(255, 0, 0, 0.8)";
       }
     }
-    return "rgba(238, 243, 243, 0.6)"; // Default color (cyan)
+    return "rgba(238, 243, 243, 0.6)";
   };
 
   return (
