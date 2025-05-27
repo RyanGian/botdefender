@@ -17,6 +17,12 @@ export default function Dashboard() {
   const [userbreakdownLoadingState, setUserbreakdownLoadingState] =
     useState(false);
 
+  const [refresh, setRefresh] = useState(false);
+
+  const toggleRefresh = () => {
+    setRefresh((prev) => !prev);
+  };
+
   return (
     <div className="panel-container">
       <PanelGroup autoSaveId="horizontal" direction="horizontal">
@@ -26,7 +32,7 @@ export default function Dashboard() {
           minSize={20}
           maxSize={40}
         >
-          <AttackInput></AttackInput>
+          <AttackInput toggleRefresh={toggleRefresh}></AttackInput>
         </Panel>
         <PanelResizeHandle className="vertical-resize-bar">
           <div className="vertical-bar"></div>
@@ -37,8 +43,10 @@ export default function Dashboard() {
               <div className="boxes">
                 <div style={{ width: "100%", height: "100%" }}>
                   <GlobeCanvas
+                    selectedCountry={userRequestBreakdownCountry}
                     setSelectedCountry={setUserRequestBreakdownCountry}
                     setLoadingState={setUserbreakdownLoadingState}
+                    refresh={refresh}
                   ></GlobeCanvas>
                 </div>
               </div>
@@ -52,12 +60,13 @@ export default function Dashboard() {
                   selectedCountry={userRequestBreakdownCountry}
                   loadingState={userbreakdownLoadingState}
                   setLoadingState={setUserbreakdownLoadingState}
+                  refresh={refresh}
                 ></UserBreakdown>
               </div>
             </Grid.Col>
             <Grid.Col span={6}>
               <div className="boxes">
-                <CountryBreakdown></CountryBreakdown>
+                <CountryBreakdown refresh={refresh}></CountryBreakdown>
               </div>
             </Grid.Col>
           </Grid>

@@ -11,7 +11,7 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 
-export default function CountryBreakdown() {
+export default function CountryBreakdown({ refresh }) {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("desc");
@@ -25,7 +25,7 @@ export default function CountryBreakdown() {
     setPageCursors([null]);
     setCurrentPage(0);
     fetchPage(0, true);
-  }, [sort, nameFilter]);
+  }, [sort, nameFilter, refresh]);
 
   const fetchPage = async (pageIndex, reset = false) => {
     setLoading(true);

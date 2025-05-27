@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import Globe from "react-globe.gl";
 import { useLayoutEffect } from "react";
 
-export default function GlobeCanvas({ setSelectedCountry, setLoadingState }) {
+export default function GlobeCanvas({
+  selectedCountry,
+  setSelectedCountry,
+  setLoadingState,
+  refresh,
+}) {
   const globeRef = useRef();
   const containerRef = useRef();
 
@@ -24,7 +29,7 @@ export default function GlobeCanvas({ setSelectedCountry, setLoadingState }) {
       .then((data) => setCountries(data.features));
 
     fetchHighlightedCountries();
-  }, []);
+  }, [refresh]);
 
   // Auto-rotate
   useEffect(() => {
@@ -112,6 +117,9 @@ export default function GlobeCanvas({ setSelectedCountry, setLoadingState }) {
             setLoadingState(true);
             // console.log("Clicked country:", polygon.properties.ADMIN);
             const countryName = polygon.properties.ADMIN;
+            if (countryName === selectedCountry) {
+              setLoadingState(false);
+            }
             setSelectedCountry(countryName);
           }}
         />

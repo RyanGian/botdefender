@@ -5,7 +5,7 @@ import { useForm } from "@mantine/form";
 import { IconCheck } from "@tabler/icons-react";
 import { countries } from "./countries";
 
-export default function AttackInput() {
+export default function AttackInput({ toggleRefresh }) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // <-- Loading state
@@ -53,8 +53,9 @@ export default function AttackInput() {
       <form
         onSubmit={form.onSubmit(async (values) => {
           setLoading(true); // Start loading
+
           try {
-            const result = await sendAttack(values.name, values.country);
+            const result = await sendAttack(values.name.trim(), values.country);
             setSubmitted(true);
             setError(null);
             setTimeout(() => setSubmitted(false), 2000);
@@ -65,6 +66,7 @@ export default function AttackInput() {
             setTimeout(() => setError(null), 2000);
           } finally {
             setLoading(false); // End loading
+            toggleRefresh();
           }
         })}
         className="attackinput-container"

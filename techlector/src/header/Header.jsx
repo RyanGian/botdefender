@@ -1,7 +1,6 @@
 import { Switch, useMantineTheme, rem } from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
 import "./Header.css";
-// import logo from "../assets/logos/logo-dark.svg";
 
 export default function Header({ handleChange, isChecked }) {
   const theme = useMantineTheme();

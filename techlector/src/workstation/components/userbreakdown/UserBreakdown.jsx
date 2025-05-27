@@ -10,6 +10,7 @@ export default function UserBreakdown({
   selectedCountry,
   loadingState,
   setLoadingState,
+  refresh,
 }) {
   const [userData, setUserData] = useState(null);
   const [series, setSeries] = useState([]);
@@ -79,26 +80,31 @@ export default function UserBreakdown({
     if (selectedCountry !== "") {
       fetchAndTransform();
     }
-  }, [selectedCountry]);
+  }, [selectedCountry, refresh]);
 
   return (
     <div className="userbreakdown-container">
-      {/* {console.log(userData)} */}
-      {userData ? (
-        <div className="userbreakdown-contents">
+      {/* {console.log(selectedCountry)} */}
+      {/* Loading State */}
+      {loadingState && (
+        <div className="userbreakdown-loading">
+          <Loader color="blue" />
+        </div>
+      )}
+
+      {/* Placeholder State */}
+      {!loadingState && !userData && (
+        <div className="userbreakdown-placeholder">
+          Please select a country on the map for a user request breakdown
+        </div>
+      )}
+
+      {/* Graph State */}
+      {!loadingState && userData && (
+        <>
           <div className="userbreakdown-title">
             User requests breakdown by month: {selectedCountry}
           </div>
-          {/* <div className="country-search">
-        <Autocomplete
-          leftSection={<IconSearch></IconSearch>}
-          size="md"
-          radius="md"
-          placeholder="Search a Country"
-          style={{ width: "200px", marginBottom: "1rem" }}
-          data={countries}
-        />
-      </div> */}
           <div className="userbreakdown-chart">
             <AreaChart
               h={300}
@@ -108,15 +114,7 @@ export default function UserBreakdown({
               withPointLabels
             />
           </div>
-        </div>
-      ) : loadingState ? (
-        <div className="userbreakdown-loading">
-          <Loader color="blue" />
-        </div>
-      ) : (
-        <div className="userbreakdown-placeholder">
-          Please select a country on the map for a user request breakdown
-        </div>
+        </>
       )}
     </div>
   );
