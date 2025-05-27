@@ -8,9 +8,6 @@ import "@mantine/core/styles.css";
 import "@mantine/charts/styles.css";
 
 export default function App() {
-  // const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  // const [isDark, setIsDark] = useLocalStorage("isDark", preference);
-
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   return (
     <MantineProvider withNormalizeCSS withGlobalStyles>
@@ -22,10 +19,6 @@ export default function App() {
           }}
         ></Header>
         <Workstation></Workstation>
-        {/* <h1 className="title">hello world!</h1>
-        <div className="box">
-          <h2>This is a box</h2>
-        </div> */}
       </div>
     </MantineProvider>
   );

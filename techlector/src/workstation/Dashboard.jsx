@@ -1,10 +1,6 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "./Dashboard.css";
 import React, { useState } from "react";
-
-import { Button } from "@mantine/core";
-import ItemMenu from "./ItemMenu.jsx";
-
 import { Grid } from "@mantine/core";
 
 import GlobeCanvas from "./components/globe/GlobeCanvas.jsx";
