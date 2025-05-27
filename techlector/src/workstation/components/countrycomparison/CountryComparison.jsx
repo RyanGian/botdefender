@@ -85,7 +85,9 @@ export default function CountryComparison({
       // console.log("Series:", generatedSeries);
     }
 
-    fetchAndTransform();
+    if (selectedCountry !== "") {
+      fetchAndTransform();
+    }
   }, [selectedCountry]);
 
   return (

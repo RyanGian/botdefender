@@ -9,17 +9,23 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
   const [countries, setCountries] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  const selectCountry = (country) => {
-    setSelectedCountry(country);
-  };
+  // const selectCountry = (country) => {
+  //   setSelectedCountry(country);
+  // };
 
-  const highlightedCountries = ["United States", "Canada", "Brazil"];
+  const [highlightedCountries, setHighlightedCountries] = useState([]);
+
+  // const highlightedCountries = ["United States", "Canada", "Brazil"];
 
   // Load countries GeoJSON
   useEffect(() => {
-    fetch("/world.geojson") // Make sure this file exists in /public
+    fetch("/world.geojson")
       .then((res) => res.json())
       .then((data) => setCountries(data.features));
+  }, []);
+
+  useEffect(() => {
+    fetchHighlightedCountries();
   }, []);
 
   // Auto-rotate
@@ -41,9 +47,32 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
     return () => observer.disconnect();
   }, []);
 
+  const fetchHighlightedCountries = async () => {
+    try {
+      const url = new URL("http://localhost:8080/countries");
+      const res = await fetch(url);
+      const json = await res.json();
+
+      const allHighlightedCountries = json.data.reduce((acc, item) => {
+        const countryName = Object.keys(item)[0];
+        acc[countryName] = item[countryName];
+        return acc;
+      }, {});
+
+      setHighlightedCountries(allHighlightedCountries);
+      console.log(JSON.stringify(allHighlightedCountries));
+    } catch (err) {
+      console.error("Error fetching countries:", err);
+    }
+  };
+
   const getPolygonCapColor = (country) => {
-    if (highlightedCountries.includes(country.properties.ADMIN)) {
-      return "rgba(255, 0, 0, 0.8)"; // Highlighted color (red)
+    if (Object.keys(highlightedCountries).includes(country.properties.ADMIN)) {
+      if (highlightedCountries[country.properties.ADMIN] === 0) {
+        return "rgba(22, 128, 75, 0.8)"; // Highlighted color (red)
+      } else {
+        return "rgba(255, 0, 0, 0.8)"; // Highlighted color (red)
+      }
     }
     return "rgba(238, 243, 243, 0.6)"; // Default color (cyan)
   };
@@ -74,7 +103,8 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
             `<div style="text-align: left;">
               <strong>${properties.ADMIN}</strong><br/>
               Population: ${Number(properties.POP_EST).toLocaleString()}<br/>
-              Region: ${properties.REGION_UN || "N/A"}
+              Region: ${properties.REGION_UN || "N/A"}<br/>
+              Users Banned: ${highlightedCountries[properties.ADMIN] ?? 0}
             </div>`
           }
           backgroundColor="rgba(0,0,0,0)"
@@ -85,8 +115,8 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
             const countryName = polygon.properties.ADMIN;
             // console.log(polygon);
             setSelectedCountry(countryName);
-            console.log("typeof setSelectedCountry", typeof setSelectedCountry);
-            console.log("asfasdfasd");
+            // console.log("typeof setSelectedCountry", typeof setSelectedCountry);
+            // console.log("asfasdfasd");
           }}
         />
       )}

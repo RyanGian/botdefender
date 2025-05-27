@@ -31,7 +31,7 @@ export default function CountryBreakdown() {
     setLoading(true);
     try {
       const cursor = pageCursors[pageIndex];
-      const url = new URL("http://localhost:8080/countries");
+      const url = new URL("http://localhost:8080/countries/filter");
       url.searchParams.append("limit", limit);
       url.searchParams.append("sort", sort);
 
