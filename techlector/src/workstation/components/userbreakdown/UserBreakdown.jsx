@@ -6,7 +6,7 @@ import { IconSearch } from "@tabler/icons-react";
 import { countries } from "./countries";
 
 export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [series, setSeries] = useState([]);
 
   async function getUserAttacksByCountry(country) {
@@ -68,9 +68,6 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
       }));
 
       setSeries(generatedSeries);
-
-      // console.log("Transformed:", transformed);
-      // console.log("Series:", generatedSeries);
     }
 
     if (selectedCountry !== "") {
@@ -80,10 +77,13 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
 
   return (
     <div className="userbreakdown-container">
-      <div className="userbreakdown-title">
-        User requests breakdown by month: {selectedCountry}
-      </div>
-      {/* <div className="country-search">
+      {console.log(userData)}
+      {userData ? (
+        <div className="userbreakdown-contents">
+          <div className="userbreakdown-title">
+            User requests breakdown by month: {selectedCountry}
+          </div>
+          {/* <div className="country-search">
         <Autocomplete
           leftSection={<IconSearch></IconSearch>}
           size="md"
@@ -93,18 +93,21 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
           data={countries}
         />
       </div> */}
-      <div className="userbreakdown-chart">
-        {
-          <AreaChart
-            h={300}
-            data={userData}
-            dataKey="date"
-            // type="gradient"
-            series={series}
-            withPointLabels
-          />
-        }
-      </div>
+          <div className="userbreakdown-chart">
+            <AreaChart
+              h={300}
+              data={userData}
+              dataKey="date"
+              series={series}
+              withPointLabels
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="userbreakdown-placeholder">
+          Please select a country on the map for a user request breakdown
+        </div>
+      )}
     </div>
   );
 }
