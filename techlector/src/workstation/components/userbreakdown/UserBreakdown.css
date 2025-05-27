@@ -4,9 +4,6 @@
   /* background-color: aqua; */
 }
 
-.userbreakdown-contents {
-}
-
 .userbreakdown-title {
   padding-top: 40px;
   padding-left: 30px;
@@ -23,6 +20,14 @@
 }
 
 .userbreakdown-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.userbreakdown-loading {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -14,6 +14,9 @@ export default function Dashboard() {
   const [userRequestBreakdownCountry, setUserRequestBreakdownCountry] =
     useState("");
 
+  const [userbreakdownLoadingState, setUserbreakdownLoadingState] =
+    useState(false);
+
   return (
     <div className="panel-container">
       <PanelGroup autoSaveId="horizontal" direction="horizontal">
@@ -34,8 +37,8 @@ export default function Dashboard() {
               <div className="boxes">
                 <div style={{ width: "100%", height: "100%" }}>
                   <GlobeCanvas
-                    selectedCountry={userRequestBreakdownCountry}
                     setSelectedCountry={setUserRequestBreakdownCountry}
+                    setLoadingState={setUserbreakdownLoadingState}
                   ></GlobeCanvas>
                 </div>
               </div>
@@ -47,7 +50,8 @@ export default function Dashboard() {
               <div className="boxes">
                 <UserBreakdown
                   selectedCountry={userRequestBreakdownCountry}
-                  setSelectedCountry={setUserRequestBreakdownCountry}
+                  loadingState={userbreakdownLoadingState}
+                  setLoadingState={setUserbreakdownLoadingState}
                 ></UserBreakdown>
               </div>
             </Grid.Col>

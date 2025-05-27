@@ -4,8 +4,13 @@ import { AreaChart } from "@mantine/charts";
 import { Input, Autocomplete } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { countries } from "./countries";
+import { Loader } from "@mantine/core";
 
-export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
+export default function UserBreakdown({
+  selectedCountry,
+  loadingState,
+  setLoadingState,
+}) {
   const [userData, setUserData] = useState(null);
   const [series, setSeries] = useState([]);
 
@@ -68,6 +73,7 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
       }));
 
       setSeries(generatedSeries);
+      setLoadingState(false);
     }
 
     if (selectedCountry !== "") {
@@ -77,7 +83,7 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
 
   return (
     <div className="userbreakdown-container">
-      {console.log(userData)}
+      {/* {console.log(userData)} */}
       {userData ? (
         <div className="userbreakdown-contents">
           <div className="userbreakdown-title">
@@ -102,6 +108,10 @@ export default function UserBreakdown({ selectedCountry, setSelectedCountry }) {
               withPointLabels
             />
           </div>
+        </div>
+      ) : loadingState ? (
+        <div className="userbreakdown-loading">
+          <Loader color="blue" />
         </div>
       ) : (
         <div className="userbreakdown-placeholder">

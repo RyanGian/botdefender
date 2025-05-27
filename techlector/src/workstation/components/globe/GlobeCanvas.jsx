@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Globe from "react-globe.gl";
 import { useLayoutEffect } from "react";
 
-export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
+export default function GlobeCanvas({ setSelectedCountry, setLoadingState }) {
   const globeRef = useRef();
   const containerRef = useRef();
 
@@ -22,9 +22,7 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
     fetch("/world.geojson")
       .then((res) => res.json())
       .then((data) => setCountries(data.features));
-  }, []);
 
-  useEffect(() => {
     fetchHighlightedCountries();
   }, []);
 
@@ -111,12 +109,10 @@ export default function GlobeCanvas({ selectedCountry, setSelectedCountry }) {
           atmosphereColor="rgba(209, 209, 209, 0)"
           atmosphereAltitude={0.15}
           onPolygonClick={(polygon) => {
+            setLoadingState(true);
             // console.log("Clicked country:", polygon.properties.ADMIN);
             const countryName = polygon.properties.ADMIN;
-            // console.log(polygon);
             setSelectedCountry(countryName);
-            // console.log("typeof setSelectedCountry", typeof setSelectedCountry);
-            // console.log("asfasdfasd");
           }}
         />
       )}
