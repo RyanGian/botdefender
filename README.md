@@ -1,4 +1,63 @@
 # Botdefender 
 
+![Screenshot 2025-05-28 101205](https://github.com/user-attachments/assets/c22e1822-ea71-42f3-834b-33ef33bb4959)
+![Screenshot 2025-05-28 101217](https://github.com/user-attachments/assets/b07ad045-07c7-402b-8877-536313dbcfdd)
+![Screenshot 2025-05-28 101438](https://github.com/user-attachments/assets/bc1be092-a7c0-435b-b717-b7e211f3f4c0)
+
 Idea: To understand and experiment with a rate-limiting mechanism to mitigate bot DDos-like attacks. A restriction is deployed whenever the threshold of backend endpoints has been reached. 
-![Screenshot 2025-05-26 130920](https://github.com/user-attachments/assets/2798904b-6dd9-488a-82a8-6481d0738515)
+
+## How to locally run application
+
+### React application (client)
+
+```sh
+cd techlector
+```
+
+```sh
+yarn install
+```
+
+```sh
+yarn dev
+```
+
+### Node application (server)
+```sh
+cd botdefender-be
+```
+```sh
+npm install
+```
+```sh
+node .
+```
+
+- You will need your firebase credentials in the root of the file named `firebaseAdminConfig.js`
+
+Current Firebase Collections:
+
+| attacks  |
+| ------------- |
+| name  | 
+| country  | 
+| time  | 
+| id  | 
+
+
+
+| users  |
+| ------------- |
+| name  | 
+| country  | 
+| banned  | 
+| requests  | 
+
+
+
+| countries |
+| ------------- |
+| countryName | 
+| requests  | 
+| banned  | 
+| usersBanned  | 
