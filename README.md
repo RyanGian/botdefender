@@ -33,8 +33,10 @@ npm install
 node .
 ```
 
-- You will need your firebase credentials in the root of the file named `firebaseAdminConfig.js`
+### Firebase credentials
 
+- You will need your firebase credentials in the root of the file named `firebaseAdminConfig.js`
+- Current collections are called: attacks, users, countries
 ![Screenshot 2025-05-28 104140](https://github.com/user-attachments/assets/a1944d3e-1720-4947-834d-63b3901e8e9d)
 
 Current Firebase Collections:
